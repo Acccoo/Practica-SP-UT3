@@ -1,4 +1,4 @@
-package potato.enterprise.distributedprogramming.server;
+package potato.enterprise.distributedprogramming.util;
 
 /**
  *
