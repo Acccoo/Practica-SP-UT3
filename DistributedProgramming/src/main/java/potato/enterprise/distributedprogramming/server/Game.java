@@ -51,7 +51,7 @@ public class Game {
     }
 
     public Player getGameHost() {
-        return gameHost;
+        return playerList.get(0);
     }
 
     public void setGameHost(Player gameHost) {
