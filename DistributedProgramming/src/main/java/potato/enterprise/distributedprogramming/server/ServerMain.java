@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -14,16 +12,18 @@ import java.util.logging.Logger;
 public class ServerMain {
 
     /**
+     * Manejador de peticiones por parte del servidor.
+     *
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Socket socket = null;
-        
-        try(ServerSocket server = new ServerSocket()) {
+
+        try (ServerSocket server = new ServerSocket()) {
             InetSocketAddress addr = new InetSocketAddress("localhost", 5555);
             server.bind(addr);
-            
-            while(true) {
+
+            while (true) {
                 socket = server.accept();
                 System.out.println("Jugador conectado al servidor");
                 Petition petition = new Petition(socket);
@@ -31,7 +31,11 @@ public class ServerMain {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (socket != null) {
+                socket.close();
+            }
         }
     }
-    
+
 }
