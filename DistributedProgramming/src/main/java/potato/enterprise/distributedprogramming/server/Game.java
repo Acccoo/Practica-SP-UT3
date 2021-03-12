@@ -2,8 +2,14 @@ package potato.enterprise.distributedprogramming.server;
 
 /**
  *
- * @author mcarr
+ * @author rosty
  */
 public class Game {
-    
+
+    Integer id = 1;
+
+    public Integer getId() {
+
+        return id;
+    }
 }
