@@ -133,19 +133,33 @@ public class Player extends Thread{
     private String[] receiveData(Socket socket) {
         List<String> data = new ArrayList<>();
         String linea;
+        String[] conversion = null;
         try ( InputStream is = socket.getInputStream();  
                 InputStreamReader isr = new InputStreamReader(is);  
-                BufferedReader bReader = new BufferedReader(isr);) {
+                BufferedReader bReader = new BufferedReader(isr)) {
+            
             while ((linea = bReader.readLine()) != null) {
                 data.add(linea);
             }
+            
+            conversion = conversor(data.get(0));
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return (String[]) data.toArray();
+        return conversion;
     }
+    
+    
     
     private void gameLoop(String string, int parseInt) {
         //No toca
+    }
+
+    private String[] conversor(String datosRecibidos) {
+        //Va a recibir "Nickname: %s Dirección: %s Puerto: %d"
+        String[] arrayDatos = datosRecibidos.split(" ");
+        
+        return new String[]{arrayDatos[3],arrayDatos[5]};
     }
 }
